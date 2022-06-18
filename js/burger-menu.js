@@ -1,9 +1,24 @@
 
-	// Мобильное меню бургер
-		const burger = document.querySelector('.btn-burger')
-		burger.addEventListener('click', () => {
-			document.querySelector('.menu-burger').classList.toggle('active')
-		})
- 		window.addEventListener('scroll', () => { 
-			document.querySelector('.menu-burger').classList.remove('active')
-		})
+let hamburger = document.querySelector('.btn-burger');
+let menu = document.querySelector('.menu-burger');
+
+const toggleMenu = () => {
+	menu.classList.toggle('active');
+}
+
+hamburger.addEventListener('click', e => {
+	e.stopPropagation();
+
+	toggleMenu();
+});
+
+document.addEventListener('click', e => {
+	let target = e.target;
+	let itsMenu = target == menu || menu.contains(target);
+	let itsHamburger = target == hamburger;
+	let activeMenu = menu.classList.contains('active');
+
+	if (!itsMenu && !itsHamburger && activeMenu) {
+		toggleMenu();
+	}
+});

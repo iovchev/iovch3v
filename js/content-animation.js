@@ -1,16 +1,26 @@
-const btnWork = document.querySelector('.link-text--work')
-const btnPhoto = document.querySelector('.link-text--location');
-const photo = document.querySelector('.link-text--photo');
 
-btnWork.addEventListener('click', (e) => {
+const buttonShowImg = document.querySelector('.link-text--location');
+const img = document.querySelector('.link-text--photo');
+
+
+const toggleImg = () => {
+	img.classList.toggle('active');
+}
+
+buttonShowImg.addEventListener('click', e => {
 	e.preventDefault();
+
+	toggleImg();
 });
 
-btnPhoto.addEventListener('click', (e) => {
-	e.preventDefault();
+document.addEventListener('click', e => {
+	let target = e.target;
+	let itsImage = target == img || img.contains(target);
+	let itsButtonImg = target == buttonShowImg;
+	let activeImg = img.classList.contains('active');
 
-		photo.classList.add('active')
-		setTimeout(() => {
-			photo.classList.remove('active')
-		}, 5000);
+	if(!itsImage && !itsButtonImg && activeImg) {
+		toggleImg();
+	}
+
 });
